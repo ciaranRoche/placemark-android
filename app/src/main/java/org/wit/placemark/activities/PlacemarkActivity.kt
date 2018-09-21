@@ -7,36 +7,31 @@ import org.jetbrains.anko.info
 import kotlinx.android.synthetic.main.activity_placemark.*
 import org.jetbrains.anko.toast
 import org.wit.placemark.R
+import org.wit.placemark.main.MainApp
 import org.wit.placemark.models.PlacemarkModel
 
 class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
+
   var placemark = PlacemarkModel()
-  val placemarks = ArrayList<PlacemarkModel>()
+  var app : MainApp? = null
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_placemark)
-    info("Placemark Activity started..")
+    app = application as MainApp
 
     btnAdd.setOnClickListener() {
-      val placemarkTitle = placemarkTitle.text.toString()
-      val placemarkDescription = placemarkDescription.text.toString()
-
-      if (placemarkTitle.isNotEmpty() && placemarkDescription.isNotEmpty()) {
-        placemark.title = placemarkTitle
-        placemark.description = placemarkDescription
-        placemarks.add(placemark)
-        info("Place Mark Added : $placemarks")
-      } else {
-        if (placemarkTitle.isEmpty()) {
-          toast("Please add a Title")
-        } else {
-          toast("Please add a Description")
-        }
-
+      placemark.title = placemarkTitle.text.toString()
+      placemark.description = placemarkDescription.text.toString()
+      if (placemark.title.isNotEmpty()) {
+        app!!.placemarks.add(placemark.copy())
+        info("add Button Pressed: $placemarkTitle")
+        app!!.placemarks.forEach { info("add Button Pressed: ${it}")}
+      }
+      else {
+        toast ("Please Enter a title")
       }
     }
   }
 }
-
 
