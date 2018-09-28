@@ -41,7 +41,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
         setResult(AppCompatActivity.RESULT_OK)
         finish()
       } else {
-        toast("Please Enter a title")
+        toast(R.string.enter_details)
       }
     }
   }
