@@ -29,6 +29,7 @@ class PlacemarkMemStore : PlacemarkStore, AnkoLogger {
       foundPlacemark.title = placemark.title
       foundPlacemark.description = placemark.description
     }
+    logAll()
   }
 
   internal fun logAll() {

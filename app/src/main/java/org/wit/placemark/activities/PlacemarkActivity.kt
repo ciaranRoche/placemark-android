@@ -33,15 +33,18 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
       placemark = intent.extras.getParcelable<PlacemarkModel>("placemark_edit")
       placemarkTitle.setText(placemark.title)
       description.setText(placemark.description)
-
     }
 
     btnAdd.setOnClickListener() {
       placemark.title = placemarkTitle.text.toString()
       placemark.description = description.text.toString()
+
       if (placemark.title.isNotEmpty()) {
-        app.placemarks.create(placemark.copy())
-        info("add Button Pressed: $placemarkTitle")
+        if(intent.hasExtra("placemark_edit")){
+          app.placemarks.update(placemark.copy())
+        }else{
+          app.placemarks.create(placemark.copy())
+        }
         setResult(AppCompatActivity.RESULT_OK)
         finish()
       } else {
