@@ -8,15 +8,13 @@ import kotlinx.android.synthetic.main.activity_placemark_list.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 import org.wit.placemark.R
-import org.wit.placemark.adapters.PlacemarkAdapter
-import org.wit.placemark.adapters.PlacemarkListener
 import org.wit.placemark.main.MainApp
 import org.wit.placemark.models.PlacemarkModel
+
 
 class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
 
   lateinit var app: MainApp
-
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -43,7 +41,6 @@ class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
   }
 
   override fun onPlacemarkClick(placemark: PlacemarkModel) {
-    startActivityForResult(intentFor<PlacemarkActivity>(), 0)
+    startActivityForResult(intentFor<PlacemarkActivity>().putExtra("placemark_edit", placemark), AppCompatActivity.RESULT_OK)
   }
 }
-

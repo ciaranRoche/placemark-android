@@ -1,4 +1,4 @@
-package org.wit.placemark.adapters
+package org.wit.placemark.activities
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -8,7 +8,12 @@ import kotlinx.android.synthetic.main.card_placemark.view.*
 import org.wit.placemark.R
 import org.wit.placemark.models.PlacemarkModel
 
-class PlacemarkAdapter constructor(private var placemarks: List<PlacemarkModel>, private val listener: PlacemarkListener) : RecyclerView.Adapter<PlacemarkAdapter.MainHolder>() {
+interface PlacemarkListener {
+  fun onPlacemarkClick(placemark: PlacemarkModel)
+}
+
+class PlacemarkAdapter constructor(private var placemarks: List<PlacemarkModel>,
+                                   private val listener: PlacemarkListener) : RecyclerView.Adapter<PlacemarkAdapter.MainHolder>() {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
     return MainHolder(LayoutInflater.from(parent?.context).inflate(R.layout.card_placemark, parent, false))
@@ -29,8 +34,4 @@ class PlacemarkAdapter constructor(private var placemarks: List<PlacemarkModel>,
       itemView.setOnClickListener { listener.onPlacemarkClick(placemark) }
     }
   }
-}
-
-interface PlacemarkListener {
-  fun onPlacemarkClick(placemark: PlacemarkModel)
 }
