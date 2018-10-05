@@ -1,5 +1,6 @@
 package org.wit.placemark.activities
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -17,6 +18,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 
   var placemark = PlacemarkModel()
   lateinit var app: MainApp
+  val IMAGE_REQUEST = 1
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -29,7 +31,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 
     app = application as MainApp
 
-    val IMAGE_REQUEST = 1
+
 
     chooseImage.setOnClickListener {
       showImagePicker(this, IMAGE_REQUEST)
@@ -72,5 +74,16 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
       }
     }
     return super.onOptionsItemSelected(item)
+  }
+
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    super.onActivityResult(requestCode, resultCode, data)
+    when (requestCode) {
+      IMAGE_REQUEST -> {
+        if (data != null) {
+          placemark.image = data.getData().toString()
+        }
+      }
+    }
   }
 }
