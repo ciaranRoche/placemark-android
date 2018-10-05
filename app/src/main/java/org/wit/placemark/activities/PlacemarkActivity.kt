@@ -25,43 +25,41 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_placemark)
-
-
     toolbarAdd.title = title
     setSupportActionBar(toolbarAdd)
     info("Placemark Activity started..")
 
     app = application as MainApp
-
-
-
-    chooseImage.setOnClickListener {
-      showImagePicker(this, IMAGE_REQUEST)
-    }
+    var edit = false
 
     if (intent.hasExtra("placemark_edit")) {
-      btnAdd.setText(R.string.button_savePlacemark)
+      edit = true
       placemark = intent.extras.getParcelable<PlacemarkModel>("placemark_edit")
       placemarkTitle.setText(placemark.title)
       description.setText(placemark.description)
       placemarkImage.setImageBitmap(readImageFromPath(this, placemark.image))
+      btnAdd.setText(R.string.save_placemark)
     }
 
     btnAdd.setOnClickListener() {
       placemark.title = placemarkTitle.text.toString()
       placemark.description = description.text.toString()
-
-      if (placemark.title.isNotEmpty()) {
-        if(intent.hasExtra("placemark_edit")){
+      if (placemark.title.isEmpty()) {
+        toast(R.string.enter_placemark_title)
+      } else {
+        if (edit) {
           app.placemarks.update(placemark.copy())
-        }else{
+        } else {
           app.placemarks.create(placemark.copy())
         }
-        setResult(AppCompatActivity.RESULT_OK)
-        finish()
-      } else {
-        toast(R.string.enter_details)
       }
+      info("add Button Pressed: $placemarkTitle")
+      setResult(AppCompatActivity.RESULT_OK)
+      finish()
+    }
+
+    chooseImage.setOnClickListener {
+      showImagePicker(this, IMAGE_REQUEST)
     }
   }
 

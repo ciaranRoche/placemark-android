@@ -3,10 +3,10 @@
   <string name="hint_placemarkTitle">Placemark Title</string>
   <string name="hint_placemarkDescription">Description </string>
   <string name="button_addPlacemark">Add Placemark</string>
-  <string name="button_savePlacemark">Save Placemark</string>
   <string name="menu_addPlacemark">Add</string>
   <string name="menu_cancelPlacemark">Cancel</string>
-  <string name="enter_details">Please Complete Details</string>
-  <string name="button_addImage">Add Image</string>
-  <string name="select_placemark_image">Select Placemark Image</string>
+  <string name="enter_placemark_title"> Please enter a Placemark Title </string>
+  <string name="save_placemark"> Save Placemark </string>
+  <string name="button_addImage"> Add Image </string>
+  <string name="select_placemark_image">Select placemark image</string>
 </resources>
