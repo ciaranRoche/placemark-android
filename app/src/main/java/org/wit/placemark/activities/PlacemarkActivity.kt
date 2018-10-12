@@ -23,6 +23,8 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
   var placemark = PlacemarkModel()
   lateinit var app: MainApp
   val IMAGE_REQUEST = 1
+  val LOCATION_REQUEST = 2
+  var location = Location(52.245696, -7.139102, 15f)
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -69,8 +71,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
     }
 
     placemarkLocation.setOnClickListener {
-      val location = Location(52.245696, -7.139102, 15f)
-      startActivity (intentFor<MapsActivity>().putExtra("location", location))
+      startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
     }
   }
 
@@ -95,6 +96,11 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
         if (data != null) {
           placemark.image = data.getData().toString()
           placemarkImage.setImageBitmap(readImage(this, resultCode, data))
+        }
+      }
+      LOCATION_REQUEST -> {
+        if (data != null){
+          location = data.extras.getParcelable<Location>("location")
         }
       }
     }
