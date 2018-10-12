@@ -20,11 +20,12 @@ import org.wit.placemark.models.PlacemarkModel
 
 class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 
-  var placemark = PlacemarkModel()
   lateinit var app: MainApp
   val IMAGE_REQUEST = 1
   val LOCATION_REQUEST = 2
   var location = Location(52.245696, -7.139102, 15f)
+  var placemark = PlacemarkModel(location = location)
+
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -52,6 +53,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
     btnAdd.setOnClickListener() {
       placemark.title = placemarkTitle.text.toString()
       placemark.description = description.text.toString()
+      placemark.location = location
       if (placemark.title.isEmpty()) {
         toast(R.string.enter_placemark_title)
       } else {
@@ -61,7 +63,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
           app.placemarks.create(placemark.copy())
         }
       }
-      info("add Button Pressed: $placemarkTitle")
+      info("add Button Pressed: $placemark")
       setResult(AppCompatActivity.RESULT_OK)
       finish()
     }

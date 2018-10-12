@@ -33,7 +33,6 @@ class PlacemarkAdapter constructor(private var placemarks: List<PlacemarkModel>,
       itemView.placemarkTitle.text = placemark.title
       itemView.description.text = placemark.description
       itemView.placemarkImageView.setImageBitmap(readImageFromPath(itemView.context, placemark.image))
-
       itemView.setOnClickListener { listener.onPlacemarkClick(placemark) }
     }
   }
