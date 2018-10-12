@@ -29,7 +29,8 @@ class PlacemarkMemStore : PlacemarkStore, AnkoLogger {
       foundPlacemark.title = placemark.title
       foundPlacemark.description = placemark.description
       foundPlacemark.image = placemark.image
-      logAll();
+      foundPlacemark.location = placemark.location
+      logAll()
     }
   }
 
