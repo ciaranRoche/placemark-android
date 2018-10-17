@@ -24,7 +24,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
   val IMAGE_REQUEST = 1
   val LOCATION_REQUEST = 2
   var location = Location(52.245696, -7.139102, 15f)
-  var placemark = PlacemarkModel(location = location)
+  var placemark = PlacemarkModel()
 
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +42,6 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
       placemark = intent.extras.getParcelable<PlacemarkModel>("placemark_edit")
       placemarkTitle.setText(placemark.title)
       description.setText(placemark.description)
-      location = placemark.location
       placemarkImage.setImageBitmap(readImageFromPath(this, placemark.image))
       btnAdd.setText(R.string.save_placemark)
       if(!placemark.image.isEmpty()){
@@ -55,7 +54,9 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
     btnAdd.setOnClickListener() {
       placemark.title = placemarkTitle.text.toString()
       placemark.description = description.text.toString()
-      placemark.location = location
+      placemark.lat = location.lat
+      placemark.lng = location.lng
+      placemark.zoom = location.zoom
       if (placemark.title.isEmpty()) {
         toast(R.string.enter_placemark_title)
       } else {
@@ -75,6 +76,12 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
     }
 
     placemarkLocation.setOnClickListener {
+      val location = Location(52.245696, -7.139102, 15f)
+      if (placemark.zoom != 0f) {
+        location.lat =  placemark.lat
+        location.lng = placemark.lng
+        location.zoom = placemark.zoom
+      }
       startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
     }
   }
@@ -105,6 +112,9 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
       LOCATION_REQUEST -> {
         if (data != null){
           location = data.extras.getParcelable<Location>("location")
+          placemark.lat = location.lat
+          placemark.lng = location.lng
+          placemark.zoom = location.zoom
         }
       }
     }

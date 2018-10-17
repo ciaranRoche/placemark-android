@@ -58,12 +58,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
   override fun onMarkerClick(marker: Marker): Boolean {
     val loc = LatLng(marker.position.latitude, marker.position.longitude)
-    marker.apply {
-      title = ("Placemark")
-      snippet = ("GPS : " + loc.toString())
-      isDraggable
-      position = loc
-    }
+    marker.snippet = "GPS : " + loc.toString()
     return false
   }
 
