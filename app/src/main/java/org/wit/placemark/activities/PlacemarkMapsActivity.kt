@@ -7,12 +7,16 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.activity_placemark.*
 import org.wit.placemark.R
 import kotlinx.android.synthetic.main.activity_placemark_maps.*
 import kotlinx.android.synthetic.main.content_placemark_maps.*
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
+import org.wit.placemark.helpers.readImageFromPath
 import org.wit.placemark.main.MainApp
 
-class PlacemarkMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
+class PlacemarkMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener, AnkoLogger {
 
   lateinit var map: GoogleMap
   lateinit var app: MainApp
@@ -68,7 +72,10 @@ class PlacemarkMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListen
   }
 
   override fun onMarkerClick(marker: Marker): Boolean {
-    currentTitle.text = marker.title
+    val placemark = app.placemarks.findById(marker.tag as Long)
+    currentTitle.text = placemark.title
+    currentDescription.text = placemark.description
+    placemarkImageView.setImageBitmap(readImageFromPath(this, placemark.image))
     return false
   }
 

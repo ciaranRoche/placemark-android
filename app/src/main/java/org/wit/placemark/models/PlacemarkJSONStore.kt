@@ -52,6 +52,11 @@ class PlacemarkJSONStore : PlacemarkStore, AnkoLogger {
     }
   }
 
+  override fun findById(id: Long): PlacemarkModel {
+    return placemarks.find { p -> p.id == id }!!
+  }
+
+
   override fun delete(placemark: PlacemarkModel) {
     placemarks.remove(placemark)
     serialize()
