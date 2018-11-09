@@ -7,6 +7,7 @@
   tools:context="org.wit.placemark.activities.PlacemarkActivity">
 
   <RelativeLayout
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -26,102 +27,128 @@
         app:titleTextColor="@color/colorPrimary" />
     </android.support.design.widget.AppBarLayout>
 
-    <ScrollView
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_below="@id/appBarLayout"
-      android:fillViewport="true">
-
-      <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <android.support.design.widget.TextInputEditText
-          android:id="@+id/placemarkTitle"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_margin="8dp"
-          android:hint="@string/hint_placemarkTitle"
-          android:inputType="text"
-          android:maxLength="25"
-          android:maxLines="1"
-          android:padding="8dp"
-          android:textColor="@color/colorPrimaryDark"
-          android:textSize="14sp" />
-
-        <android.support.design.widget.TextInputEditText
-          android:id="@+id/description"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_margin="8dp"
-          android:hint="@string/hint_placemarkDescription"
-          android:inputType="text"
-          android:maxLength="25"
-          android:maxLines="1"
-          android:padding="8dp"
-          android:textColor="@color/colorPrimaryDark"
-          android:textSize="14sp" />
-
-        <Button
-          android:id="@+id/chooseImage"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_margin="16dp"
-          android:background="@color/colorAccent"
-          android:paddingBottom="8dp"
-          android:paddingTop="8dp"
-          android:text="@string/button_addImage"
-          android:textColor="@color/colorPrimary"
-          android:textSize="16sp"/>
-
-        <ImageView
-          android:id="@+id/placemarkImage"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          app:srcCompat="@mipmap/ic_launcher"/>
-
-        <Button
-          android:id="@+id/btnAdd"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_margin="16dp"
-          android:background="@color/colorAccent"
-          android:paddingBottom="8dp"
-          android:paddingTop="8dp"
-          android:stateListAnimator="@null"
-          android:text="@string/button_addPlacemark"
-          android:textColor="@color/colorPrimary"
-          android:textSize="16sp" />
-
-        <Button
-          android:id="@+id/placemarkLocation"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_margin="16dp"
-          android:background="@color/colorAccent"
-          android:paddingBottom="8dp"
-          android:paddingTop="8dp"
-          android:stateListAnimator="@null"
-          android:text="@string/button_location"
-          android:textColor="@color/colorPrimary"
-          android:textSize="16sp"/>
-
-        <Button
-          android:id="@+id/placemarkDelete"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_margin="16dp"
-          android:background="@color/colorDanger"
-          android:paddingBottom="8dp"
-          android:paddingTop="8dp"
-          android:stateListAnimator="@null"
-          android:text="@string/button_delete"
-          android:textColor="@color/colorPrimary"
-          android:textSize="16sp"/>
-
-      </LinearLayout>
-    </ScrollView>
-
   </RelativeLayout>
+
+  <android.support.constraint.ConstraintLayout
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+
+    <android.support.design.widget.TextInputLayout
+      android:id="@+id/placemark_title"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginEnd="8dp"
+      android:hint="@string/hint_placemarkTitle"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
+
+      <android.support.design.widget.TextInputEditText
+        android:id="@+id/placemarkTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+      android:id="@+id/placemark_description"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginEnd="8dp"
+      android:hint="@string/hint_placemarkDescription"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/placemark_title">
+
+      <android.support.design.widget.TextInputEditText
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+      android:id="@+id/btnAdd"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginEnd="8dp"
+      android:background="@color/colorAccent"
+      android:text="@string/button_addPlacemark"
+      android:textColor="@color/colorPrimary"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/placemark_description"
+      tools:text="@string/button_addPlacemark" />
+
+    <Button
+      android:id="@+id/chooseImage"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginEnd="8dp"
+      android:background="@color/colorAccent"
+      android:text="@string/button_addImage"
+      android:textColor="@color/colorPrimary"
+      app:layout_constraintEnd_toStartOf="@+id/placemarkLocation"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/btnAdd"
+      tools:text="@string/button_addImage" />
+
+    <Button
+      android:id="@+id/placemarkLocation"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginEnd="8dp"
+      android:background="@color/colorAccent"
+      android:text="@string/button_location"
+      android:textColor="@color/colorPrimary"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/chooseImage"
+      app:layout_constraintTop_toBottomOf="@+id/btnAdd"
+      tools:text="@string/button_location" />
+
+    <ImageView
+      android:id="@+id/placemarkImage"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginEnd="8dp"
+      android:layout_marginBottom="8dp"
+      app:layout_constraintBottom_toTopOf="@+id/placemarkDelete"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/chooseImage"
+      app:layout_constraintVertical_chainStyle="packed"
+      app:srcCompat="@mipmap/ic_launcher" />
+
+    <Button
+      android:id="@+id/placemarkDelete"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginEnd="8dp"
+      android:layout_marginBottom="16dp"
+      android:background="@color/colorDanger"
+      android:text="@string/button_delete"
+      android:textColor="@color/colorPrimary"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/placemarkImage"
+      tools:text="@string/button_delete" />
+  </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

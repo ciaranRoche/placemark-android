@@ -30,8 +30,8 @@ class PlacemarkAdapter constructor(private var placemarks: List<PlacemarkModel>,
   class MainHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(placemark: PlacemarkModel, listener: PlacemarkListener) {
-      itemView.placemarkTitle.text = placemark.title
-      itemView.description.text = placemark.description
+      itemView.placemark_title.text = placemark.title
+      itemView.placemark_description.text = placemark.description
       itemView.placemarkImageView.setImageBitmap(readImageFromPath(itemView.context, placemark.image))
       itemView.setOnClickListener { listener.onPlacemarkClick(placemark) }
     }
