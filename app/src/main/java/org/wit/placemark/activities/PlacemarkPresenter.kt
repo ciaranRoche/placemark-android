@@ -56,7 +56,7 @@ class PlacemarkPresenter(val activity: PlacemarkActivity) {
             location.lng = placemark.lng
             location.zoom = placemark.zoom
         }
-        activity.startActivityForResult(activity.intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
+        activity.startActivityForResult(activity.intentFor<EditLocationActivity>().putExtra("location", location), LOCATION_REQUEST)
     }
 
     fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
