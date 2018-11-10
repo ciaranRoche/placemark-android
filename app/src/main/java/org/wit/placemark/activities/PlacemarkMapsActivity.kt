@@ -76,7 +76,7 @@ class PlacemarkMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListen
     currentTitle.text = placemark.title
     currentDescription.text = placemark.description
     placemarkImageView.setImageBitmap(readImageFromPath(this, placemark.image))
-    return false
+    return true
   }
 
 }
