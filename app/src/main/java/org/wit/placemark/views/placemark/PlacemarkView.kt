@@ -1,4 +1,4 @@
-package org.wit.placemark.activities
+package org.wit.placemark.views.placemark
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -12,7 +12,7 @@ import org.wit.placemark.R
 import org.wit.placemark.helpers.readImageFromPath
 import org.wit.placemark.models.PlacemarkModel
 
-class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
+class PlacemarkView : AppCompatActivity(), AnkoLogger {
 
   lateinit var presenter: PlacemarkPresenter
   var placemark = PlacemarkModel()

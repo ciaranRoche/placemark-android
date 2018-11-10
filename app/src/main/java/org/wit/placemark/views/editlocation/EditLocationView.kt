@@ -1,4 +1,4 @@
-package org.wit.placemark.activities
+package org.wit.placemark.views.editlocation
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -6,8 +6,9 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.Marker
 import org.wit.placemark.R
+import org.wit.placemark.views.editlocation.EditLocationPresenter
 
-class EditLocationActivity : AppCompatActivity(), GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
+class EditLocationView : AppCompatActivity(), GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
 
   lateinit var map: GoogleMap
   lateinit var presenter: EditLocationPresenter

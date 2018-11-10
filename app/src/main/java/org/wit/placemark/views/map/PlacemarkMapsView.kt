@@ -1,32 +1,26 @@
-package org.wit.placemark.activities
+package org.wit.placemark.views.map
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
-import kotlinx.android.synthetic.main.activity_placemark.*
 import org.wit.placemark.R
 import kotlinx.android.synthetic.main.activity_placemark_maps.*
 import kotlinx.android.synthetic.main.content_placemark_maps.*
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 import org.wit.placemark.helpers.readImageFromPath
-import org.wit.placemark.main.MainApp
 
-class PlacemarkMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener, AnkoLogger {
+
+class PlacemarkMapsView : AppCompatActivity(), GoogleMap.OnMarkerClickListener, AnkoLogger {
 
   lateinit var map: GoogleMap
-  lateinit var app: MainApp
+  lateinit var presenter: PlacemarkMapPresenter
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_placemark_maps)
     setSupportActionBar(toolbarMaps)
-
-    app = application as MainApp
+    presenter = PlacemarkMapPresenter(this)
 
     mapView.onCreate(savedInstanceState)
     mapView.getMapAsync{
@@ -61,18 +55,11 @@ class PlacemarkMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListen
   }
 
   fun configureMap() {
-    map.uiSettings.setZoomControlsEnabled(true)
-    app.placemarks.findAll().forEach {
-      val loc = LatLng(it.lat, it.lng)
-      val options = MarkerOptions().title(it.title).position(loc)
-      map.addMarker(options).tag = it.id
-      map.setOnMarkerClickListener(this)
-      map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.zoom))
-    }
+    presenter.doConfigureMap(map, this)
   }
 
   override fun onMarkerClick(marker: Marker): Boolean {
-    val placemark = app.placemarks.findById(marker.tag as Long)
+    val placemark = presenter.getPlacemark(marker)
     currentTitle.text = placemark.title
     currentDescription.text = placemark.description
     placemarkImageView.setImageBitmap(readImageFromPath(this, placemark.image))
