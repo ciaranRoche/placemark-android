@@ -11,8 +11,9 @@ import org.jetbrains.anko.toast
 import org.wit.placemark.R
 import org.wit.placemark.helpers.readImageFromPath
 import org.wit.placemark.models.PlacemarkModel
+import org.wit.placemark.views.BaseView
 
-class PlacemarkView : AppCompatActivity(), AnkoLogger {
+class PlacemarkView : BaseView(), AnkoLogger {
 
   lateinit var presenter: PlacemarkPresenter
   var placemark = PlacemarkModel()
@@ -20,37 +21,27 @@ class PlacemarkView : AppCompatActivity(), AnkoLogger {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_placemark)
-    toolbarAdd.title = title
-    setSupportActionBar(toolbarAdd)
 
-    presenter = PlacemarkPresenter(this)
+    init(toolbarAdd)
 
-    btnAdd.setOnClickListener {
-      if (placemarkTitle.text.toString().isEmpty()) {
-        toast(R.string.enter_placemark_title)
-      } else {
-        presenter.doAddOrSave(placemarkTitle.text.toString(), description.text.toString())
-      }
-    }
+    presenter = initPresenter (PlacemarkPresenter(this)) as PlacemarkPresenter
 
     chooseImage.setOnClickListener { presenter.doSelectImage() }
 
     placemarkLocation.setOnClickListener { presenter.doSetLocation() }
   }
 
-  fun showPlacemark(placemark: PlacemarkModel) {
+  override fun showPlacemark(placemark: PlacemarkModel) {
     placemarkTitle.setText(placemark.title)
     description.setText(placemark.description)
     placemarkImage.setImageBitmap(readImageFromPath(this, placemark.image))
     if (placemark.image != null) {
-      chooseImage.setText(R.string.button_editImage)
+      chooseImage.setText(R.string.select_placemark_image)
     }
-    btnAdd.setText(R.string.save_placemark)
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
     menuInflater.inflate(R.menu.menu_placemark, menu)
-    if (presenter.edit) menu.getItem(0).setVisible(true)
     return super.onCreateOptionsMenu(menu)
   }
 
@@ -68,5 +59,9 @@ class PlacemarkView : AppCompatActivity(), AnkoLogger {
     if (data != null) {
       presenter.doActivityResult(requestCode, resultCode, data)
     }
+  }
+
+  override fun onBackPressed() {
+    presenter.doCancel()
   }
 }
