@@ -29,6 +29,8 @@ class PlacemarkView : BaseView(), AnkoLogger {
     chooseImage.setOnClickListener { presenter.doSelectImage() }
 
     placemarkLocation.setOnClickListener { presenter.doSetLocation() }
+
+    btnAdd.setOnClickListener { presenter.doAddOrSave(placemarkTitle.text.toString(), description.text.toString()) }
   }
 
   override fun showPlacemark(placemark: PlacemarkModel) {

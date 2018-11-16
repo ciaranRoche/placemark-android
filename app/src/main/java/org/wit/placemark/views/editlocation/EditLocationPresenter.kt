@@ -8,8 +8,10 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import org.wit.placemark.models.Location
+import org.wit.placemark.views.BasePresenter
+import org.wit.placemark.views.BaseView
 
-class EditLocationPresenter(val view: EditLocationView) {
+class EditLocationPresenter(view: BaseView) : BasePresenter(view) {
 
     var location = Location()
 
@@ -37,8 +39,8 @@ class EditLocationPresenter(val view: EditLocationView) {
     fun doOnBackPressed() {
         val resultIntent = Intent()
         resultIntent.putExtra("location", location)
-        view.setResult(Activity.RESULT_OK, resultIntent)
-        view.finish()
+        view?.setResult(Activity.RESULT_OK, resultIntent)
+        view?.finish()
     }
 
     fun doUpdateMarker(marker: Marker) {
