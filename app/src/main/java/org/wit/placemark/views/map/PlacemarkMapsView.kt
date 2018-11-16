@@ -1,7 +1,6 @@
 package org.wit.placemark.views.map
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 import org.wit.placemark.R
@@ -9,9 +8,10 @@ import kotlinx.android.synthetic.main.activity_placemark_maps.*
 import kotlinx.android.synthetic.main.content_placemark_maps.*
 import org.jetbrains.anko.AnkoLogger
 import org.wit.placemark.helpers.readImageFromPath
+import org.wit.placemark.views.BaseView
 
 
-class PlacemarkMapsView : AppCompatActivity(), GoogleMap.OnMarkerClickListener, AnkoLogger {
+class PlacemarkMapsView : BaseView(), GoogleMap.OnMarkerClickListener, AnkoLogger {
 
   lateinit var map: GoogleMap
   lateinit var presenter: PlacemarkMapPresenter

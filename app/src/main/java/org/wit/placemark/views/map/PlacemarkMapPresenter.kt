@@ -5,18 +5,14 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import org.wit.placemark.main.MainApp
 import org.wit.placemark.models.PlacemarkModel
+import org.wit.placemark.views.BasePresenter
+import org.wit.placemark.views.BaseView
 
-class PlacemarkMapPresenter(val view: PlacemarkMapsView) {
-    var app: MainApp
-
-    init {
-        app = view.application as MainApp
-    }
+class PlacemarkMapPresenter(view: BaseView) : BasePresenter(view) {
 
     fun doConfigureMap(map: GoogleMap, listener: GoogleMap.OnMarkerClickListener){
-        map.uiSettings.setZoomControlsEnabled(true)
+        map.uiSettings.isZoomControlsEnabled = true
         app.placemarks.findAll().forEach {
             val loc = LatLng(it.lat, it.lng)
             val options = MarkerOptions().title(it.title).position(loc)
