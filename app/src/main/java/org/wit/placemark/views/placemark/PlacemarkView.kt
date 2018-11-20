@@ -93,10 +93,11 @@ class PlacemarkView : BaseView(), AnkoLogger {
     mapView.onPause()
   }
 
-  override fun onResume() {
-    super.onResume()
-    mapView.onResume()
-  }
+    override fun onResume() {
+        super.onResume()
+        mapView.onResume()
+        presenter.doResartLocationUpdates()
+    }
 
   override fun onSaveInstanceState(outState: Bundle?) {
     super.onSaveInstanceState(outState)
