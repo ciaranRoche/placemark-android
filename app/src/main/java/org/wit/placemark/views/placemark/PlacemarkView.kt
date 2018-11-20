@@ -26,8 +26,8 @@ class PlacemarkView : BaseView(), AnkoLogger {
 
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync {
-      map = it
-      presenter.doConfigureMap(map)
+      presenter.doConfigureMap(it)
+      it.setOnMapClickListener { presenter.doSetLocation() }
     }
 
 
@@ -37,7 +37,6 @@ class PlacemarkView : BaseView(), AnkoLogger {
 
     chooseImage.setOnClickListener { presenter.doSelectImage() }
 
-    placemarkLocation.setOnClickListener { presenter.doSetLocation() }
   }
 
   override fun showPlacemark(placemark: PlacemarkModel) {
@@ -47,6 +46,8 @@ class PlacemarkView : BaseView(), AnkoLogger {
     if (placemark.image != null) {
       chooseImage.setText(R.string.select_placemark_image)
     }
+    lat.setText("%.6f".format(placemark.lat))
+    lng.setText("%.6f".format(placemark.lng))
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
