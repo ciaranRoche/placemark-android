@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import com.google.android.gms.maps.GoogleMap
 import kotlinx.android.synthetic.main.activity_placemark.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.toast
@@ -17,10 +18,18 @@ class PlacemarkView : BaseView(), AnkoLogger {
 
   lateinit var presenter: PlacemarkPresenter
   var placemark = PlacemarkModel()
+  lateinit var map: GoogleMap
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_placemark)
+
+    mapView.onCreate(savedInstanceState);
+    mapView.getMapAsync {
+      map = it
+      presenter.doConfigureMap(map)
+    }
+
 
     init(toolbarAdd)
 
@@ -29,8 +38,6 @@ class PlacemarkView : BaseView(), AnkoLogger {
     chooseImage.setOnClickListener { presenter.doSelectImage() }
 
     placemarkLocation.setOnClickListener { presenter.doSetLocation() }
-
-    btnAdd.setOnClickListener { presenter.doAddOrSave(placemarkTitle.text.toString(), description.text.toString()) }
   }
 
   override fun showPlacemark(placemark: PlacemarkModel) {
@@ -52,6 +59,9 @@ class PlacemarkView : BaseView(), AnkoLogger {
       R.id.item_cancel -> {
         presenter.doCancel()
       }
+      R.id.item_save -> {
+        presenter.doAddOrSave(placemarkTitle.text.toString(), description.text.toString())
+      }
     }
     return super.onOptionsItemSelected(item)
   }
@@ -65,5 +75,30 @@ class PlacemarkView : BaseView(), AnkoLogger {
 
   override fun onBackPressed() {
     presenter.doCancel()
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
+    mapView.onDestroy()
+  }
+
+  override fun onLowMemory() {
+    super.onLowMemory()
+    mapView.onLowMemory()
+  }
+
+  override fun onPause() {
+    super.onPause()
+    mapView.onPause()
+  }
+
+  override fun onResume() {
+    super.onResume()
+    mapView.onResume()
+  }
+
+  override fun onSaveInstanceState(outState: Bundle?) {
+    super.onSaveInstanceState(outState)
+    mapView.onSaveInstanceState(outState)
   }
 }

@@ -1,108 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   tools:context="org.wit.placemark.views.placemark.PlacemarkView">
 
-  <RelativeLayout
-    android:id="@+id/relativeLayout"
+  <android.support.design.widget.AppBarLayout
+    android:id="@+id/appBarLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/colorAccent"
+    android:fitsSystemWindows="true"
+    app:elevation="0dip"
+    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-    <android.support.design.widget.AppBarLayout
-      android:id="@+id/appBarLayout"
+    <android.support.v7.widget.Toolbar
+      android:id="@+id/toolbarAdd"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:background="@color/colorAccent"
-      android:fitsSystemWindows="true"
-      app:elevation="0dip"
-      app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+      app:titleTextColor="@color/colorPrimary" />
 
-      <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbarAdd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:titleTextColor="@color/colorPrimary" />
-    </android.support.design.widget.AppBarLayout>
-
-  </RelativeLayout>
+  </android.support.design.widget.AppBarLayout>
 
   <android.support.constraint.ConstraintLayout
-    android:layout_width="0dp"
-    android:layout_height="0dp"
-    app:layout_constraintBottom_toBottomOf="parent"
+    android:layout_width="match_parent"
+    android:layout_height="600dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.0"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+    app:layout_constraintTop_toTopOf="parent">
 
-    <android.support.design.widget.TextInputLayout
-      android:id="@+id/placemark_title"
-      android:layout_width="0dp"
+    <EditText
+      android:id="@+id/placemarkTitle"
+      android:layout_width="365dp"
       android:layout_height="wrap_content"
-      android:layout_marginStart="8dp"
-      android:layout_marginTop="8dp"
       android:layout_marginEnd="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="64dp"
+      android:ems="10"
       android:hint="@string/hint_placemarkTitle"
+      android:inputType="text"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.503"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent">
+      app:layout_constraintTop_toTopOf="parent" />
 
-      <android.support.design.widget.TextInputEditText
-        android:id="@+id/placemarkTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-      android:id="@+id/placemark_description"
-      android:layout_width="0dp"
+    <EditText
+      android:id="@+id/description"
+      android:layout_width="365dp"
       android:layout_height="wrap_content"
+      android:layout_marginEnd="8dp"
       android:layout_marginStart="8dp"
       android:layout_marginTop="8dp"
-      android:layout_marginEnd="8dp"
+      android:ems="10"
       android:hint="@string/hint_placemarkDescription"
+      android:inputType="textPersonName"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/placemark_title">
-
-      <android.support.design.widget.TextInputEditText
-        android:id="@+id/description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    </android.support.design.widget.TextInputLayout>
-
-    <Button
-      android:id="@+id/btnAdd"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="8dp"
-      android:layout_marginTop="8dp"
-      android:layout_marginEnd="8dp"
-      android:background="@color/colorAccent"
-      android:text="@string/button_addPlacemark"
-      android:textColor="@color/colorPrimary"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/placemark_description"
-      tools:text="@string/button_addPlacemark" />
+      app:layout_constraintTop_toBottomOf="@+id/placemarkTitle" />
 
     <Button
       android:id="@+id/chooseImage"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginStart="8dp"
-      android:layout_marginTop="8dp"
       android:layout_marginEnd="8dp"
-      android:background="@color/colorAccent"
       android:text="@string/button_addImage"
-      android:textColor="@color/colorPrimary"
-      app:layout_constraintEnd_toStartOf="@+id/placemarkLocation"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/btnAdd"
-      tools:text="@string/button_addImage" />
+      app:layout_constraintTop_toBottomOf="@+id/description" />
 
     <Button
       android:id="@+id/placemarkLocation"
@@ -111,44 +80,37 @@
       android:layout_marginStart="8dp"
       android:layout_marginTop="8dp"
       android:layout_marginEnd="8dp"
-      android:background="@color/colorAccent"
       android:text="@string/button_location"
-      android:textColor="@color/colorPrimary"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toEndOf="@+id/chooseImage"
-      app:layout_constraintTop_toBottomOf="@+id/btnAdd"
-      tools:text="@string/button_location" />
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/placemarkImage" />
 
     <ImageView
       android:id="@+id/placemarkImage"
+      android:layout_width="355dp"
+      android:layout_height="139dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="16dp"
+      android:layout_marginEnd="8dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/chooseImage"
+      app:srcCompat="@drawable/ic_launcher_background" />
+
+    <com.google.android.gms.maps.MapView
+      android:id="@+id/mapView"
       android:layout_width="0dp"
-      android:layout_height="0dp"
+      android:layout_height="163dp"
       android:layout_marginStart="8dp"
       android:layout_marginTop="8dp"
       android:layout_marginEnd="8dp"
       android:layout_marginBottom="8dp"
-      app:layout_constraintBottom_toTopOf="@+id/placemarkDelete"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/chooseImage"
-      app:layout_constraintVertical_chainStyle="packed"
-      app:srcCompat="@mipmap/ic_launcher" />
-
-    <Button
-      android:id="@+id/placemarkDelete"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="8dp"
-      android:layout_marginTop="8dp"
-      android:layout_marginEnd="8dp"
-      android:layout_marginBottom="16dp"
-      android:background="@color/colorDanger"
-      android:text="@string/button_delete"
-      android:textColor="@color/colorPrimary"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/placemarkImage"
-      tools:text="@string/button_delete" />
+      app:layout_constraintTop_toBottomOf="@+id/placemarkLocation" />
+
   </android.support.constraint.ConstraintLayout>
+
 </android.support.constraint.ConstraintLayout>
